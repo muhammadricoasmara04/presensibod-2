@@ -190,6 +190,27 @@ img {
     font-size: var(--small-font-size);
 }
 
+/* alert */
+.alert {
+    display: flex;
+    justify-content: center; /* Menempatkan elemen di tengah secara horizontal */
+    align-items: center; /* Menempatkan elemen di tengah secara vertikal */
+    flex-direction: column; /* Menyusun elemen li secara vertikal */
+}
+
+.alert ul {
+    list-style-type: none; /* Menghilangkan bullet point */
+    padding: 0; /* Menghilangkan padding default */
+    margin: 0; /* Menghilangkan margin default */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Menempatkan elemen li di tengah */
+}
+
+.alert li {
+    margin: 5px 0; /* Memberi sedikit ruang antara pesan */
+}
+
 /*=============== BREAKPOINTS ===============*/
 /* For medium devices */
 @media screen and (min-width: 576px) {
