@@ -32,7 +32,7 @@ button {
 
 body {
     color: var(--black-color);
-    background-image: url("/img/logo.png");
+    /* background-image: url("/img/logo.png"); */
     background-size: 50vh; /* Ukuran gambar sesuai yang Anda inginkan */
     background-repeat: no-repeat; /* Mencegah pengulangan gambar */
     background-position: center; /* Posisikan gambar di tengah */
@@ -54,8 +54,7 @@ img {
 }
 
 /*=============== LOGIN ===============*/
-.container {
-}
+
 .login {
     position: relative;
     height: 100vh;

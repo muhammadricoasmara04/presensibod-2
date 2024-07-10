@@ -39,9 +39,7 @@
             </div>
 
             <button type="submit" class="login__button">Login</button>
-
         </form>
     </div>
-
 
 @endsection
