@@ -12,5 +12,7 @@ Route::get('/logout', [LoginController::class, 'logout']);
 
 // roleadmin
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin', [RoleuserController::class, 'admin']);
+    Route::get('dashboard/superadmin', [RoleuserController::class, 'admin']);
+    Route::get('dashboard/peserta', [RoleuserController::class, 'participans']);
+    Route::get('/logout', [RoleuserController::class, 'logout']);
 });

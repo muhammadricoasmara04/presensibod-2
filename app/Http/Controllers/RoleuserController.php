@@ -12,9 +12,15 @@ class RoleuserController extends Controller
         echo "halo selamat datang dihalaman admin " . Auth::user()->name;
         echo "<a href='logout'>loguot>></a>";
     }
-    function participan()
+    function participans()
     {
         echo "halo selamat datang dihalaman participans" . Auth::user()->name;
         echo "<a href='logout'>loguot>></a>";
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('');
     }
 }

@@ -23,7 +23,7 @@ class DummyUserSeeder extends Seeder
             [
                 'name' => 'johndoepeserta',
                 'email' => 'johndoe@gmail.com',
-                'role' => 'admin',
+                'role' => 'peserta',
                 'password' => bcrypt('123456789')
             ],
         ];

@@ -31,7 +31,11 @@ class LoginController extends Controller
             'password' => $request->password,
         ];
         if (Auth::attempt($credential)) {
-            return redirect('admin');
+            if (Auth::user()->role == 'superadmin') {
+                return redirect('dashboard/superadmin');
+            } else if (Auth::user()->role == 'peserta') {
+                return redirect('dasboard/perserta');
+            }
         } else {
             return redirect('')->withErrors('Email atau Password yang Anda masukan salah!')->withInput();
         }
