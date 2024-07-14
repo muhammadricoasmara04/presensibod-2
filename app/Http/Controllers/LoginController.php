@@ -34,7 +34,7 @@ class LoginController extends Controller
             if (Auth::user()->role == 'superadmin') {
                 return redirect('dashboard/superadmin');
             } else if (Auth::user()->role == 'peserta') {
-                return redirect('dasboard/perserta');
+                return redirect('dashboard/peserta');
             }
         } else {
             return redirect('')->withErrors('Email atau Password yang Anda masukan salah!')->withInput();
