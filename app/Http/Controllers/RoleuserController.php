@@ -14,8 +14,7 @@ class RoleuserController extends Controller
     }
     function participans()
     {
-        echo "halo selamat datang dihalaman participans" . Auth::user()->name;
-        echo "<a href='/logout'>loguot>></a>";
+       return view('/dashboard/peserta/index');
     }
 
     public function logout()

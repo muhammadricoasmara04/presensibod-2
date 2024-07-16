@@ -24,7 +24,7 @@ class UserAccess
         if ($user->role !== $role) {
             // Redirect jika role tidak sesuai
             // return redirect('home')->with('error', 'You do not have access to this page');
-            return response()->json('tidak dapa mengakses karena anda superadmin');
+            return response()->json('tidak dapat mengakses karena anda superadmin');
         }
 
         return $next($request);
