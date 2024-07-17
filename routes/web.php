@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RoleuserController;
 use App\Http\Middleware\UserAccess;
@@ -23,3 +24,6 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::get('/logout', [RoleuserController::class, 'logout']);
 });
+
+//Dashboard Access
+Route::resource('/dashboard/peserta/show',[DashboardController::class,'show']);

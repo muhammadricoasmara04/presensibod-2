@@ -2,7 +2,7 @@
     <header>
         <div class="image-text">
             <span class="image">
-                <!--<img src="logo.png" alt="">-->
+                <img src="/img/rico.jpg" alt="User Image">
             </span>
             <div class="text logo-text">
                 <span class="name">Codinglab</span>
@@ -15,33 +15,15 @@
         <div class="menu">
             <ul class="menu-links">
                 <li class="nav-link">
-                    <a href="#">
+                    <a href="/dashboard/peserta/">
                         <i class='bx bx-home-alt icon'></i>
                         <span class="text nav-text">Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="#">
-                        <i class='bx bx-bar-chart-alt-2 icon'></i>
-                        <span class="text nav-text">Revenue</span>
-                    </a>
-                </li>
-                <li class="nav-link">
-                    <a href="#">
-                        <i class='bx bx-bell icon'></i>
-                        <span class="text nav-text">Notifications</span>
-                    </a>
-                </li>
-                <li class="nav-link">
-                    <a href="#">
-                        <i class='bx bx-pie-chart-alt icon'></i>
-                        <span class="text nav-text">Analytics</span>
-                    </a>
-                </li>
-                <li class="nav-link">
-                    <a href="#">
-                        <i class='bx bx-heart icon'></i>
-                        <span class="text nav-text">Likes</span>
+                    <a href="/dashboard/peserta/show">
+                        <i class='bx bx-history icon'></i>
+                        <span class="text nav-text">Histori</span>
                     </a>
                 </li>
                 <li class="nav-link">
@@ -69,8 +51,6 @@
                     <span class="switch"></span>
                 </div>
             </li>
-
         </div>
     </div>
-    <link rel="stylesheet" href="dashboard.css">
 </nav>

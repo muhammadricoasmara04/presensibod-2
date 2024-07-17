@@ -14,7 +14,8 @@ class RoleuserController extends Controller
     }
     function participans()
     {
-       return view('/dashboard/peserta/index');
+
+        return view('/dashboard/peserta/index');
     }
 
     public function logout()
