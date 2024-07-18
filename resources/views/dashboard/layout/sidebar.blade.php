@@ -15,19 +15,21 @@
         <div class="menu">
             <ul class="menu-links">
                 <li class="nav-link">
-                    <a href="/dashboard/peserta/">
+                    <a class="nav {{ Request::is('dashboard/peserta') ? 'active' : '' }}" aria-current="page"
+                        href="/dashboard/peserta/">
                         <i class='bx bx-home-alt icon'></i>
                         <span class="text nav-text">Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="/dashboard/peserta/show">
+                    <a class="nav {{ Request::is('dashboard/peserta/show') ? 'active' : '' }}"
+                        href="/dashboard/peserta/show">
                         <i class='bx bx-history icon'></i>
                         <span class="text nav-text">Histori</span>
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="#">
+                    <a class="nav {{ Request::is('dashboard/peserta/wallets') ? 'active' : '' }}" href="#">
                         <i class='bx bx-wallet icon'></i>
                         <span class="text nav-text">Wallets</span>
                     </a>
@@ -35,11 +37,14 @@
             </ul>
         </div>
         <div class="bottom-content">
-            <li class="">
-                <a href="#">
-                    <i class='bx bx-log-out icon'></i>
-                    <span class="text nav-text">Logout</span>
-                </a>
+            <li class="nav-link">
+                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="logout-button">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">Logout</span>
+                    </button>
+                </form>
             </li>
             <li class="mode">
                 <div class="sun-moon">
