@@ -22,7 +22,7 @@ class ParticipanController extends Controller
      */
     public function create()
     {
-        //
+        return view('/dashboard/peserta/create');
     }
 
     /**

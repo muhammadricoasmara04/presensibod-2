@@ -38,5 +38,9 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware([UserAccess::class . ':peserta'])->group(function () {
         Route::get('dashboard/peserta/show', [ParticipanController::class, 'show']);
     });
+
+    Route::middleware([UserAccess::class . ':peserta'])->group(function () {
+        Route::get('dashboard/peserta/create', [ParticipanController::class, 'create']);
+    });
     Route::post('/logout', [ParticipanController::class, 'logout'])->name('logout');
 });
