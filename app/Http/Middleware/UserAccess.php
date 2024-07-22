@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserAccess
 {
@@ -16,15 +17,28 @@ class UserAccess
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
-        if (!Auth::check()) {
-            return redirect('login');
-        }
+        // Set waktu sesi menjadi 1 menit (60 detik)
+        $timeout = 3600; // dalam detik
 
-        $user = Auth::user();
-        if ($user->role !== $role) {
-            // Redirect jika role tidak sesuai
-            // return redirect('home')->with('error', 'You do not have access to this page');
-            return response()->json('tidak dapat mengakses karena anda superadmin');
+        if (Auth::check()) {
+            $lastActivity = Session::get('lastActivityTime');
+            $currentTime = time();
+
+            if ($lastActivity && ($currentTime - $lastActivity) > $timeout) {
+                Auth::logout();
+                Session::flush();
+                return redirect('/')->with('message', 'You have been logged out due to inactivity.');
+            }
+
+            Session::put('lastActivityTime', $currentTime);
+
+            $user = Auth::user();
+            if ($user->role !== $role) {
+                // Redirect jika role tidak sesuai
+                return response()->json('tidak dapat mengakses karena anda superadmin');
+            }
+        } else {
+            return redirect('/');
         }
 
         return $next($request);

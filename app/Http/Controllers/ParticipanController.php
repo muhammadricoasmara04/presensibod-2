@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Participan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ParticipanController extends Controller
 {
@@ -30,7 +31,22 @@ class ParticipanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataURL = $request->input('image');
+        $image = str_replace('data:image/png;base64,', '', $dataURL);
+        $image = str_replace(' ', '+', $image);
+        $imageName = 'photo_' . time() . '.png';
+
+        Storage::disk('public')->put($imageName, base64_decode($image));
+
+        // Simpan informasi foto di database jika perlu
+        // Misalnya, simpan di tabel participants
+
+        $presensi = new Participan();
+        $presensi->image = $imageName;
+        // Tambahkan atribut lain yang diperlukan
+        $presensi->save();
+
+        return response()->json(['message' => 'Photo saved successfully', 'image' => $imageName]);
     }
 
     /**

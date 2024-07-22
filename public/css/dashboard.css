@@ -337,3 +337,15 @@ body.dark .home .text {
 .sidebar .nav.active {
     background-color: #dde8fb;
 }
+
+/* Webcam */
+#webcam video {
+    display: flex;
+    gap: 8px;
+    width: 100% !important;
+    margin: auto;
+    height: auto !important;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+}

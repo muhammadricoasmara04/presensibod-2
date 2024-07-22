@@ -7,26 +7,11 @@ use App\Http\Controllers\RoleuserController;
 use App\Http\Middleware\UserAccess;
 use Illuminate\Support\Facades\Route;
 
-// auth
-Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/', [LoginController::class, 'authenticate'])->name('login')->middleware('guest');
-Route::get('/logout', [LoginController::class, 'logout']);
+Route::get('/', [LoginController::class, 'index'])->name('login.index')->middleware('guest');
+Route::post('/', [LoginController::class, 'authenticate'])->name('login.authenticate');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-
-// roleadmin
-Route::middleware(['auth'])->group(function () {
-
-    // Route::middleware([UserAccess::class . ':superadmin'])->group(function () {
-    //     Route::get('dashboard/superadmin', [RoleuserController::class, 'admin']);
-    // });
-
-    // Route::middleware([UserAccess::class . ':peserta'])->group(function () {
-    //     Route::get('dashboard/peserta', [RoleuserController::class, 'participans']);
-    // });
-    Route::get('/logout', [RoleuserController::class, 'logout']);
-});
-
-//Dashboard Access
+// Authenticated Routes
 Route::middleware(['auth'])->group(function () {
     Route::middleware([UserAccess::class . ':superadmin'])->group(function () {
         Route::get('dashboard/superadmin', [RoleuserController::class, 'admin']);
@@ -34,13 +19,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware([UserAccess::class . ':peserta'])->group(function () {
         Route::get('dashboard/peserta', [ParticipanController::class, 'index']);
-    });
-    Route::middleware([UserAccess::class . ':peserta'])->group(function () {
         Route::get('dashboard/peserta/show', [ParticipanController::class, 'show']);
-    });
-
-    Route::middleware([UserAccess::class . ':peserta'])->group(function () {
         Route::get('dashboard/peserta/create', [ParticipanController::class, 'create']);
+        Route::post('/save-photo', [ParticipanController::class, 'store']);
     });
-    Route::post('/logout', [ParticipanController::class, 'logout'])->name('logout');
 });

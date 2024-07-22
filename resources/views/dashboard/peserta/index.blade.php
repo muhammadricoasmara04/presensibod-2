@@ -8,11 +8,12 @@
             <div class="button-container">
                 <button type="button" class="btn btn-primary" id="checkinBtn">Checkin</button>
                 <button type="button" class="btn btn-primary">Checkout</button>
+                <a href="/dashboard/peserta/create" type="button" class="btn btn-primary">Absen</a>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="cameraModalLabel"
+    {{-- <div class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="cameraModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -33,5 +34,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
