@@ -16,6 +16,7 @@
     border-bottom: 1px solid #e4ebf3;
     padding: 50px 30px 15px;
     position: relative;
+    margin-top: -130px;
 }
 .footer-dark {
     position: relative; /* Tambahkan ini untuk memastikan pseudo-elemen diposisikan relatif terhadap .footer-dark */

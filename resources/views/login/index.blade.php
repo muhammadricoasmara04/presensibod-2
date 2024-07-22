@@ -19,7 +19,6 @@
             <div class="login__content">
                 <div class="login__box">
                     <i class="ri-user-3-line login__icon"></i>
-
                     <div class="login__box-input">
                         <input type="email" class="login__input" name="email" id="email" placeholder="" autofocus
                             required value="{{ old('email') }}">
@@ -39,9 +38,7 @@
             </div>
 
             <button type="submit" class="login__button">Login</button>
-
         </form>
     </div>
-
 
 @endsection
