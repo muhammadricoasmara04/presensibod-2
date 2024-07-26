@@ -21,6 +21,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('dashboard/peserta', [ParticipanController::class, 'index']);
         Route::get('dashboard/peserta/show', [ParticipanController::class, 'show']);
         Route::get('dashboard/peserta/create', [ParticipanController::class, 'create']);
-        Route::post('/save-photo', [ParticipanController::class, 'store']);
+        Route::post('/dashboard/peserta/store', [ParticipanController::class, 'store']);
     });
 });

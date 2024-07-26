@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('presensi', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->dateTime('checkin_time')->nullable();
-            $table->dateTime('checkout_time')->nullable();
+            $table->string('name')->nullable();
+            $table->time('checkin_time')->nullable();
+            $table->time('checkout_time')->nullable();
+            $table->date('date')->nullable();
+            $table->string('location_in')->nullable();
+            $table->string('location_out')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

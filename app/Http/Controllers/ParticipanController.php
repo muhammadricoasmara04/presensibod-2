@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Participan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ParticipanController extends Controller
@@ -31,22 +32,33 @@ class ParticipanController extends Controller
      */
     public function store(Request $request)
     {
-        $dataURL = $request->input('image');
-        $image = str_replace('data:image/png;base64,', '', $dataURL);
-        $image = str_replace(' ', '+', $image);
-        $imageName = 'photo_' . time() . '.png';
+        $name   = $request->user()->name;
+        $location = $request->location;
+        $image = $request->image;
+        $checkin_time = date("H:i:s");
+        $checkout_time = date("H:i:s");
+        $date = date("Y-m-d");
+        $folder_path = "public/uploads/absensi/";
+        $formatName = $name . "-" . $date;
+        $image_parts = explode(";base64", $image);
+        $image_base64 = base64_decode($image_parts[1]);
+        $fileName = $formatName . ".png";
+        $file = $folder_path . $fileName;
+        $data = [
+            'name' => $name,
+            'date' => $date,
+            'checkin_time' => $checkin_time,
+            'image' => $fileName,
+            'location_in' => $location,
+        ];
 
-        Storage::disk('public')->put($imageName, base64_decode($image));
-
-        // Simpan informasi foto di database jika perlu
-        // Misalnya, simpan di tabel participants
-
-        $presensi = new Participan();
-        $presensi->image = $imageName;
-        // Tambahkan atribut lain yang diperlukan
-        $presensi->save();
-
-        return response()->json(['message' => 'Photo saved successfully', 'image' => $imageName]);
+        $simpan = DB::table('presensi')->insert($data);
+        if ($simpan) {
+            echo 0;
+            Storage::put($file, $image_base64);
+        } else {
+            echo 1;
+        }
     }
 
     /**
@@ -80,6 +92,13 @@ class ParticipanController extends Controller
     {
         //
     }
+
+    public function showMap()
+    {
+        $user = Auth::user();
+        return view('map', compact('user'));
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();
