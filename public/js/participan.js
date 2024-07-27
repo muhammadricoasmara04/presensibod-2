@@ -80,9 +80,18 @@ document.addEventListener("DOMContentLoaded", function () {
                     cache: false,
                     success: function (response) {
                         if (response == 0) {
-                            alert("sukses");
+                            Swal.fire({
+                                title: "Success",
+                                text: "Terimakasih, Selamat Menjalakan Aktivitasnya",
+                                icon: "success",
+                            });
+                            redirect("dashboard/peserta");
                         } else {
-                            alert("error");
+                            Swal.fire({
+                                title: "Error",
+                                text: "Maaf Gagal Absen, Silahkan Hubungi Admin",
+                                icon: "error",
+                            });
                         }
                     },
                 });

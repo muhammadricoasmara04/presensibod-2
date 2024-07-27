@@ -6,8 +6,8 @@
     <div class="presen_content">
         <div class="presen_box">
             <div class="button-container">
-                <a href="/dashboard/peserta/create" type="button" class="btn btn-primary">Check In</a>
-                <a href="/dashboard/peserta/create" type="button" class="btn btn-primary">Check Out</a>
+                <a href="/dashboard/create" type="button" class="btn btn-primary">Check In</a>
+                <a href="/dashboard/create" type="button" class="btn btn-primary">Check Out</a>
             </div>
         </div>
     </div>

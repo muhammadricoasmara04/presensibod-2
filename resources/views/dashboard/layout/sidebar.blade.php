@@ -15,21 +15,20 @@
         <div class="menu">
             <ul class="menu-links">
                 <li class="nav-link">
-                    <a class="nav {{ Request::is('dashboard/peserta') ? 'active' : '' }}" aria-current="page"
-                        href="/dashboard/peserta/">
+                    <a class="nav {{ Request::is('dashboard/') ? 'active' : '' }}" aria-current="page"
+                        href="/dashboard/">
                         <i class='bx bx-home-alt icon'></i>
                         <span class="text nav-text">Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a class="nav {{ Request::is('dashboard/peserta/show') ? 'active' : '' }}"
-                        href="/dashboard/peserta/show">
+                    <a class="nav {{ Request::is('dashboard/show') ? 'active' : '' }}" href="/dashboard/show">
                         <i class='bx bx-history icon'></i>
                         <span class="text nav-text">Histori</span>
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a class="nav {{ Request::is('dashboard/peserta/wallets') ? 'active' : '' }}" href="#">
+                    <a class="nav {{ Request::is('dashboard/wallets') ? 'active' : '' }}" href="#">
                         <i class='bx bx-wallet icon'></i>
                         <span class="text nav-text">Wallets</span>
                     </a>
@@ -59,4 +58,3 @@
         </div>
     </div>
 </nav>
-

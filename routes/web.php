@@ -18,9 +18,9 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::middleware([UserAccess::class . ':peserta'])->group(function () {
-        Route::get('dashboard/peserta', [ParticipanController::class, 'index']);
-        Route::get('dashboard/peserta/show', [ParticipanController::class, 'show']);
-        Route::get('dashboard/peserta/create', [ParticipanController::class, 'create']);
-        Route::post('/dashboard/peserta/store', [ParticipanController::class, 'store']);
+        Route::get('dashboard', [ParticipanController::class, 'index'])->middleware('auth');
+        Route::get('dashboard/show', [ParticipanController::class, 'show']);
+        Route::get('dashboard/create', [ParticipanController::class, 'create']);
+        Route::post('dashboard/store', [ParticipanController::class, 'store']);
     });
 });
