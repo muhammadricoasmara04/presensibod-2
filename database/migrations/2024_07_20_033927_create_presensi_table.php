@@ -19,7 +19,8 @@ return new class extends Migration
             $table->date('date')->nullable();
             $table->string('location_in')->nullable();
             $table->string('location_out')->nullable();
-            $table->string('image')->nullable();
+            $table->string('image_in')->nullable();
+            $table->string('image_out')->nullable();
             $table->timestamps();
         });
     }

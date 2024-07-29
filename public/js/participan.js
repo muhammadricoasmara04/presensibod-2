@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 var csrfToken = $('meta[name="csrf-token"]').attr("content");
                 $.ajax({
                     type: "POST",
-                    url: "/dashboard/peserta/store",
+                    url: "/dashboard/store",
                     data: {
                         _token: csrfToken,
                         image: image,
@@ -79,13 +79,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     },
                     cache: false,
                     success: function (response) {
-                        if (response == 0) {
+                      var statusPopup= response.split("|");
+                        if (statusPopup[0] == "success") {
                             Swal.fire({
-                                title: "Success",
-                                text: "Terimakasih, Selamat Menjalakan Aktivitasnya",
+                                title: "ABSEN SUCCESS",
+                                text:statusPopup[1],
                                 icon: "success",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "/dashboard/";
+                                }
                             });
-                            redirect("dashboard/peserta");
                         } else {
                             Swal.fire({
                                 title: "Error",

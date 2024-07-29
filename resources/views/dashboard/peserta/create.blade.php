@@ -16,10 +16,17 @@
     </div>
     <div class="row mt-3">
         <div class="col">
-            <button class="btn btn-primary btn-block" id="takecapture">
-                <i class='bx bx-camera'></i>
-                <span class="text nav-text">Absen</span>
-            </button>
+            @if ($check > 0)
+                <button class="btn btn-danger btn-block" id="takecapture">
+                    <i class='bx bx-camera'></i>
+                    <span class="text nav-text">Absen Pulang</span>
+                </button>
+            @else
+                <button class="btn btn-primary btn-block" id="takecapture">
+                    <i class='bx bx-camera'></i>
+                    <span class="text nav-text">Absen Masuk</span>
+                </button>
+            @endif
         </div>
     </div>
     <div class="row mt-3">

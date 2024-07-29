@@ -16,7 +16,11 @@ class ParticipanController extends Controller
      */
     public function index()
     {
-        return view('/dashboard/peserta/index');
+        $today = date("Y-m-d");
+        $name   = Auth::user()->name;
+        $presensitoday = DB::table('presensi')->where('name', $name)->where('date', $today)->first();
+        $checkin_in = $presensitoday ? $presensitoday->checkin_time : 'Belum Absen';
+        return view('/dashboard/peserta/index', compact('presensitoday', 'checkin_in'));
     }
 
     /**
@@ -24,7 +28,10 @@ class ParticipanController extends Controller
      */
     public function create()
     {
-        return view('/dashboard/peserta/create');
+        $today = date("Y-m-d");
+        $name   = Auth::user()->name;
+        $check = DB::table('presensi')->where('date', $today)->where('name', $name)->count();
+        return view('/dashboard/peserta/create', compact('check'));
     }
 
     /**
@@ -32,8 +39,9 @@ class ParticipanController extends Controller
      */
     public function store(Request $request)
     {
-        $name   = $request->user()->name;
+
         $location = $request->location;
+        $name = $request->user()->name;
         $image = $request->image;
         $checkin_time = date("H:i:s");
         $checkout_time = date("H:i:s");
@@ -44,20 +52,37 @@ class ParticipanController extends Controller
         $image_base64 = base64_decode($image_parts[1]);
         $fileName = $formatName . ".png";
         $file = $folder_path . $fileName;
-        $data = [
-            'name' => $name,
-            'date' => $date,
-            'checkin_time' => $checkin_time,
-            'image' => $fileName,
-            'location_in' => $location,
-        ];
 
-        $simpan = DB::table('presensi')->insert($data);
-        if ($simpan) {
-            echo 0;
-            Storage::put($file, $image_base64);
+        $check = DB::table('presensi')->where('date', $date)->where('name', $name)->count();
+        if ($check > 0) {
+            $date_out = [
+                'date' => $date,
+                'checkout_time' => $checkout_time,
+                'image_out' => $fileName,
+                'location_out' => $location,
+            ];
+            $update = DB::table('presensi')->where('date', $date)->where('name', $name)->update($date_out);
+            if ($update) {
+                echo "success|Terimakasih, Sudah Absen Pulang|out";
+                Storage::put($file, $image_base64);
+            } else {
+                echo "error|Maaf Gagal Absen Pulang, Silahkan Hubungi Admin FHCI|out ";
+            }
         } else {
-            echo 1;
+            $data = [
+                'name' => $name,
+                'date' => $date,
+                'checkin_time' => $checkin_time,
+                'image_in' => $fileName,
+                'location_in' => $location,
+            ];
+            $simpan = DB::table('presensi')->insert($data);
+            if ($simpan) {
+                echo "success|Terimakasih, Selamat Menjalankan Aktivitasnya|in";
+                Storage::put($file, $image_base64);
+            } else {
+                echo "error|Maaf Gagal Absen Pulang, Silahkan Hubungi Admin FHCI|in";
+            }
         }
     }
 
