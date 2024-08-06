@@ -67,7 +67,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 Webcam.snap(function (uri) {
                     image = uri;
                 });
+                var status = $("#status").val();
                 var location = $("#location").val();
+                var reason = $("#reason").val();
                 var csrfToken = $('meta[name="csrf-token"]').attr("content");
                 $.ajax({
                     type: "POST",
@@ -76,16 +78,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         _token: csrfToken,
                         image: image,
                         location: location,
+                        status: status,
+                        reason: reason,
                     },
                     cache: false,
                     success: function (response) {
-                      var statusPopup= response.split("|");
+                        var statusPopup = response.split("|");
                         if (statusPopup[0] == "success") {
-                            Swal.fire({
-                                title: "ABSEN SUCCESS",
-                                text:statusPopup[1],
-                                icon: "success",
-                            }).then((result) => {
+                            Swal.fire("Absen Success!").then((result) => {
                                 if (result.isConfirmed) {
                                     window.location.href = "/dashboard/";
                                 }
@@ -105,5 +105,32 @@ document.addEventListener("DOMContentLoaded", function () {
         Webcam.on("error", function (err) {
             console.log("Webcam error:", err);
         });
+    });
+});
+function updateTime() {
+    var now = new Date();
+    var hours = now.getHours().toString().padStart(2, "0");
+    var minutes = now.getMinutes().toString().padStart(2, "0");
+    var seconds = now.getSeconds().toString().padStart(2, "0");
+    var currentTime = hours + ":" + minutes + ":" + seconds;
+    document.getElementById("current_time").innerText = currentTime;
+}
+
+// Perbarui waktu setiap detik
+setInterval(updateTime, 1000);
+
+// Jalankan updateTime untuk pertama kali saat halaman dimuat
+updateTime();
+$(document).ready(function () {
+    $(".status-btn").click(function (event) {
+        event.preventDefault();
+
+        var status = $(this).data("status");
+        $("#status").val(status);
+
+        // Redirect to the create page if status is 'Hadir'
+        if (status === "Hadir") {
+            window.location.href = "/dashboard/create";
+        }
     });
 });

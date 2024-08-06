@@ -26,6 +26,12 @@ class DummyUserSeeder extends Seeder
                 'role' => 'peserta',
                 'password' => bcrypt('123456789')
             ],
+            [
+                'name' => 'johndoesss',
+                'email' => 'johndoe1@gmail.com',
+                'role' => 'peserta',
+                'password' => bcrypt('123456789')
+            ]
         ];
         foreach ($userData as $key => $val) {
             User::create($val);

@@ -22,7 +22,21 @@ class DashboardController extends Controller
     {
         //
     }
+    public function storeStatus(Request $request)
+    {
+        // Validasi data jika diperlukan
+        $request->validate([
+            'status' => 'required|string|max:255',
+        ]);
 
+        // Simpan data ke database
+        Dashboard::create([
+            'status' => $request->status,
+        ]);
+
+        // Response JSON
+        return response()->json(['success' => 'Status berhasil disimpan']);
+    }
     /**
      * Store a newly created resource in storage.
      */

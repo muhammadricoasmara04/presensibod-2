@@ -20,7 +20,8 @@ class ParticipanController extends Controller
         $name   = Auth::user()->name;
         $presensitoday = DB::table('presensi')->where('name', $name)->where('date', $today)->first();
         $checkin_in = $presensitoday ? $presensitoday->checkin_time : 'Belum Absen';
-        return view('/dashboard/peserta/index', compact('presensitoday', 'checkin_in'));
+        $checkout_out = $presensitoday && $presensitoday->checkout_time ? $presensitoday->checkout_time : 'Belum Absen';
+        return view('/dashboard/peserta/index', compact('presensitoday', 'checkin_in', 'checkout_out'));
     }
 
     /**
@@ -39,27 +40,29 @@ class ParticipanController extends Controller
      */
     public function store(Request $request)
     {
-
         $location = $request->location;
         $name = $request->user()->name;
         $image = $request->image;
         $checkin_time = date("H:i:s");
         $checkout_time = date("H:i:s");
         $date = date("Y-m-d");
+        $status = $request->status;
+        $reason = $request->reason;
         $folder_path = "public/uploads/absensi/";
-        $formatName = $name . "-" . $date;
-        $image_parts = explode(";base64", $image);
+        $image_parts = explode(";base64,", $image);
         $image_base64 = base64_decode($image_parts[1]);
-        $fileName = $formatName . ".png";
-        $file = $folder_path . $fileName;
 
         $check = DB::table('presensi')->where('date', $date)->where('name', $name)->count();
+
         if ($check > 0) {
+            $formatName = $name . "-" . $date . "-checkout";
+            $fileName = $formatName . ".png";
+            $file = $folder_path . $fileName;
             $date_out = [
-                'date' => $date,
                 'checkout_time' => $checkout_time,
                 'image_out' => $fileName,
                 'location_out' => $location,
+
             ];
             $update = DB::table('presensi')->where('date', $date)->where('name', $name)->update($date_out);
             if ($update) {
@@ -69,19 +72,25 @@ class ParticipanController extends Controller
                 echo "error|Maaf Gagal Absen Pulang, Silahkan Hubungi Admin FHCI|out ";
             }
         } else {
+            $formatName = $name . "-" . $date . "-checkin";
+            $fileName = $formatName . ".png";
+            $file = $folder_path . $fileName;
+
             $data = [
                 'name' => $name,
                 'date' => $date,
                 'checkin_time' => $checkin_time,
                 'image_in' => $fileName,
                 'location_in' => $location,
+                'status' => $status,
+                'reason' => $reason
             ];
             $simpan = DB::table('presensi')->insert($data);
             if ($simpan) {
                 echo "success|Terimakasih, Selamat Menjalankan Aktivitasnya|in";
                 Storage::put($file, $image_base64);
             } else {
-                echo "error|Maaf Gagal Absen Pulang, Silahkan Hubungi Admin FHCI|in";
+                echo "error|Maaf Gagal Absen, Silahkan Hubungi Admin FHCI|in";
             }
         }
     }

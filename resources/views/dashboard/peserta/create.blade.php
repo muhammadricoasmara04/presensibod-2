@@ -17,12 +17,12 @@
     <div class="row mt-3">
         <div class="col">
             @if ($check > 0)
-                <button class="btn btn-danger btn-block" id="takecapture">
+                <button class="btncreate btn-danger btn-block" id="takecapture">
                     <i class='bx bx-camera'></i>
                     <span class="text nav-text">Absen Pulang</span>
                 </button>
             @else
-                <button class="btn btn-primary btn-block" id="takecapture">
+                <button class="btncreate btn-primary btn-block" id="takecapture">
                     <i class='bx bx-camera'></i>
                     <span class="text nav-text">Absen Masuk</span>
                 </button>
@@ -34,6 +34,12 @@
             <div id="userData" data-username="{{ Auth::user()->name }}"></div>
         </div>
     </div>
+    <div>
+        <input type="text" id="status" value="{{ request('status') }}">
+    </div>
 
+      <div>
+        <input type="text" id="reason" value="{{ request('reason') }}">
+    </div>
     <script></script>
 @endsection
