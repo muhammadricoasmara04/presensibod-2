@@ -35,6 +35,27 @@ class ParticipanController extends Controller
         return view('/dashboard/peserta/create', compact('check'));
     }
 
+    public function uploadSickLetter(Request $request)
+    {
+        $request->validate([
+            'suratSakit' => 'required|file|mimes:pdf,doc,docx,jpg,png|max:2048',
+        ]);
+        $location = $request->location;
+        $file = $request->file('suratSakit');
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        $filePath = $file->storeAs('surat', $fileName, 'public');
+
+        DB::table('presensi')->insert([
+            'name' => $request->user()->name,
+            'status' => $request->status,
+            'sick_letter' => $filePath,
+            'date' => date('Y-m-d'),
+            'checkin_time' => date("H:i:s"),
+            'location_in' => $location,
+        ]);
+
+        return redirect('/dashboard')->with('success', 'Surat sakit berhasil diunggah.');
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -51,7 +72,6 @@ class ParticipanController extends Controller
         $folder_path = "public/uploads/absensi/";
         $image_parts = explode(";base64,", $image);
         $image_base64 = base64_decode($image_parts[1]);
-
         $check = DB::table('presensi')->where('date', $date)->where('name', $name)->count();
 
         if ($check > 0) {
@@ -62,7 +82,6 @@ class ParticipanController extends Controller
                 'checkout_time' => $checkout_time,
                 'image_out' => $fileName,
                 'location_out' => $location,
-
             ];
             $update = DB::table('presensi')->where('date', $date)->where('name', $name)->update($date_out);
             if ($update) {
@@ -83,8 +102,11 @@ class ParticipanController extends Controller
                 'image_in' => $fileName,
                 'location_in' => $location,
                 'status' => $status,
-                'reason' => $reason
+                'reason' => $reason,
             ];
+
+
+
             $simpan = DB::table('presensi')->insert($data);
             if ($simpan) {
                 echo "success|Terimakasih, Selamat Menjalankan Aktivitasnya|in";

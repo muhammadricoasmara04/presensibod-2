@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('date')->nullable();
             $table->string('status')->nullable();
             $table->string('reason')->nullable();
+            $table->string('sick_letter')->nullable();
             $table->string('location_in')->nullable();
             $table->string('location_out')->nullable();
             $table->string('image_in')->nullable();

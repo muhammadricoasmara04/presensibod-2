@@ -22,5 +22,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('dashboard/show', [ParticipanController::class, 'show']);
         Route::get('dashboard/create', [ParticipanController::class, 'create']);
         Route::post('dashboard/store', [ParticipanController::class, 'store']);
+        // routes/web.php
+        Route::post('/dashboard/uploadSickLetter', [ParticipanController::class, 'uploadSickLetter']);
     });
 });

@@ -134,3 +134,35 @@ $(document).ready(function () {
         }
     });
 });
+
+// $("#presensiForm").submit(function (e) {
+//     e.preventDefault();
+
+//     var formData = new FormData(this);
+//     formData.append("_token", "{{ csrf_token() }}");
+
+//     $.ajax({
+//         type: "POST",
+//         url: "/dashboard/uploadSickLetter",
+//         data: formData,
+//         processData: false,
+//         contentType: false,
+//         cache: false,
+//         success: function (response) {
+//             var statusPopup = response.split("|");
+//             if (statusPopup[0] == "success") {
+//                 Swal.fire("Absen Success!").then((result) => {
+//                     if (result.isConfirmed) {
+//                         window.location.href = "/dashboard/";
+//                     }
+//                 });
+//             } else {
+//                 Swal.fire({
+//                     title: "Error",
+//                     text: "Maaf Gagal Absen, Silahkan Hubungi Admin",
+//                     icon: "error",
+//                 });
+//             }
+//         },
+//     });
+// });
