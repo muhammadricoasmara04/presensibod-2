@@ -2,15 +2,15 @@
 .navbar {
     background: linear-gradient(
         to bottom,
-        rgba(255, 13, 13, 0.4),
-        rgba(255, 255, 255, 70%)
+        rgba(255, 14, 14, 0.822),
+        rgba(255, 255, 255, 0.909)
     );
 }
 /* Footer */
 .footer-dark {
     background: linear-gradient(
         to top,
-        rgba(255, 13, 13, 0.4),
+        rgba(255, 14, 14, 0.822),
         rgba(250, 235, 235, 0.7)
     );
     border-bottom: 1px solid #e4ebf3;
@@ -32,12 +32,12 @@
     background: linear-gradient(
         to right,
         #f06,
-        #4a90e2,
-        #f06,
-        #4a90e2
+        #fad104,
+        rgb(255, 0, 0),
+        #ffc004
     ); /* Gantilah dengan warna gradien yang diinginkan */
     background-size: 200% 100%; /* Memperluas latar belakang untuk memungkinkan animasi */
-    animation: gradientMove 3s linear infinite; /* Animasi bergerak */
+    animation: gradientMove 1s linear infinite; /* Animasi bergerak */
 }
 
 @keyframes gradientMove {

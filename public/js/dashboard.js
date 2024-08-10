@@ -8,9 +8,9 @@ mainContent = document.querySelector(".main-content");
 toggle.addEventListener("click", function () {
     sidebar.classList.toggle("close");
     if (sidebar.classList.contains("close")) {
-        mainContent.style.marginLeft = "90px"; // 88px for sidebar + 5px gap
+        mainContent.style.marginLeft = "88px"; // 88px for sidebar + 5px gap
     } else {
-        mainContent.style.marginLeft = "255px"; // 250px for sidebar + 5px gap
+        mainContent.style.marginLeft = "200px"; // 250px for sidebar + 5px gap
     }
 });
 

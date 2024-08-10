@@ -20,7 +20,8 @@
         @else
             <div class="wrapper">
                 <div class="presen_content">
-                    <div id="current_time" class="current-time mb-3"></div>
+                    <div id="current_time" class="current-time mb-3">
+                    </div>
                     <div class="button-container">
                         <a href="/dashboard/create" type="button" class="btn btn-primary custom-btn" id="checkin-button">
                             Check In

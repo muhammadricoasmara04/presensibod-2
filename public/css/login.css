@@ -65,7 +65,7 @@ img {
 
 .login__form {
     position: relative;
-    background-color: hsla(0, 97%, 50%, 0.263);
+    background-color: hsl(0, 98%, 60%);
     border: 2px solid var(--white-color);
     margin-inline: 1.5rem;
     padding: 2.5rem 1.5rem;

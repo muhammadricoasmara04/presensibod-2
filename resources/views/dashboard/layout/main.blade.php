@@ -10,6 +10,7 @@
 
     <!----======== CSS ======== -->
     <link href='/css/dashboard.css' rel='stylesheet'>
+    <link href='/css/sidebar.css' rel='stylesheet'>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <!----===== Boxicons CSS ===== -->
