@@ -1,6 +1,5 @@
 @extends('layout.main')
 @section('container')
-
     <div class="login">
         {{-- <img src="" alt="login image" class="login__img"> --}}
         @if ($errors->any())
@@ -15,7 +14,6 @@
         <form action="/" class="login__form" method="POST">
             @csrf
             <h1 class="login__title">Login</h1>
-
             <div class="login__content">
                 <div class="login__box">
                     <i class="ri-user-3-line login__icon"></i>

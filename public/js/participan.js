@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 Webcam.snap(function (uri) {
                     image = uri;
                 });
+                const userId = $("#userData").data("userid");
                 var status = $("#status").val();
                 var location = $("#location").val();
                 var reason = $("#reason").val();
@@ -77,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     data: {
                         _token: csrfToken,
                         image: image,
+                        user_id: userId,
                         location: location,
                         status: status,
                         reason: reason,

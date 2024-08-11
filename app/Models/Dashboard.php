@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Dashboard extends Model
 {
     use HasFactory;
+
+    protected $table = 'presensi'; // Nama tabel yang sebenarnya
     protected $fillable = ['status'];
 }

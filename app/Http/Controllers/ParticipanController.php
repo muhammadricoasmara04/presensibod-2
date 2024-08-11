@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
+use App\Models\Dashboard;
 
 class ParticipanController extends Controller
 {
@@ -61,6 +63,7 @@ class ParticipanController extends Controller
      */
     public function store(Request $request)
     {
+        $user_id = $request->user_id;
         $location = $request->location;
         $name = $request->user()->name;
         $image = $request->image;
@@ -96,6 +99,7 @@ class ParticipanController extends Controller
             $file = $folder_path . $fileName;
 
             $data = [
+                'user_id' => $user_id,
                 'name' => $name,
                 'date' => $date,
                 'checkin_time' => $checkin_time,
@@ -120,9 +124,12 @@ class ParticipanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Participan $participan)
+    public function show()
     {
-        return view('/dashboard/peserta/show');
+        $user = Auth::user(); // Mendapatkan data user yang sedang login
+        $presensi = DB::table('presensi')->where('user_id', $user->id)->get();
+
+        return view("/dashboard/peserta/show", ['presensi' => $presensi]);
     }
 
     /**

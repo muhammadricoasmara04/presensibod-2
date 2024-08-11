@@ -15,6 +15,8 @@
         </form>
     @else
         <h1>Webcam Test</h1>
+        <div id="userData" data-userid="{{ Auth::user()->id }}"></div>
+
         <div class="row" style="margin-top:40">
             <div class="col d-flex">
                 <input type="hidden" id=location>

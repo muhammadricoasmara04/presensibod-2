@@ -6,6 +6,7 @@
     /*Color mode HSL(hue, saturation, lightness)*/
     --white-color: hsl(0, 0%, 100%);
     --black-color: hsl(0, 0%, 0%);
+
     /*========== Font and typography ==========*/
     /*.5rem = 8px | 1rem = 16px ...*/
     --body-font: "Poppins", sans-serif;
@@ -32,7 +33,6 @@ button {
 
 body {
     color: var(--black-color);
-    /* background-image: url("/img/logo.png"); */
     background-size: 50vh; /* Ukuran gambar sesuai yang Anda inginkan */
     background-repeat: no-repeat; /* Mencegah pengulangan gambar */
     background-position: center; /* Posisikan gambar di tengah */
@@ -65,7 +65,7 @@ img {
 
 .login__form {
     position: relative;
-    background-color: hsl(0, 98%, 60%);
+    background-color: hsl(0, 100%, 89%);
     border: 2px solid var(--white-color);
     margin-inline: 1.5rem;
     padding: 2.5rem 1.5rem;

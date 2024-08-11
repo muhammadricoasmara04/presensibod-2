@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('presensi', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('name')->nullable();
             $table->time('checkin_time')->nullable();
             $table->time('checkout_time')->nullable();
@@ -25,6 +26,8 @@ return new class extends Migration
             $table->string('image_in')->nullable();
             $table->string('image_out')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

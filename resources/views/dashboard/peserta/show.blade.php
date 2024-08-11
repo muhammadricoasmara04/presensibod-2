@@ -1,98 +1,42 @@
 @extends('dashboard.layout.main')
+
 @section('container')
-    <style>
-        .table_component {
-            overflow: auto;
-            width: 100%;
-        }
+    <h2>Responsive Table</h2>
 
-        .table_component table {
-            border: 1px solid #dededf;
-            height: 100%;
-            width: 100%;
-            table-layout: auto;
-            border-collapse: collapse;
-            border-spacing: 1px;
-            text-align: left;
-        }
-
-        .table_component caption {
-            caption-side: top;
-            text-align: left;
-        }
-
-        .table_component th {
-            border: 1px solid #dededf;
-            background-color: #eceff1;
-            color: #000000;
-            padding: 5px;
-        }
-
-        .table_component td {
-            border: 1px solid #dededf;
-            background-color: #ffffff;
-            color: #000000;
-            padding: 5px;
-        }
-    </style>
-    <div class="table_component" role="region" tabindex="0">
-        <table>
-            <caption>Table 1</caption>
+    <div class="table-wrapper" style="overflow-x: auto;">
+        <table class="fl-table">
             <thead>
                 <tr>
-                    <th>Nama </th>
+                    <th>NO</th>
+                    <th>Nama</th>
+                    <th>Status</th>
+                    <th>Clock-in</th>
+                    <th>Clock-out</th>
                     <th>Tanggal</th>
-                    <th>Check In</th>
-                    <th>Check Out</th>
-                    <th>Header 5</th>
-                    <th>Header 6</th>
-                    <th>Header 7</th>
-                    <th>Header 8</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($presensi as $key => $item)
+                    <tr>
+                        <td>{{ $key + 1 }}</td> <!-- Nomor urut -->
+                        <td>{{ $item->name }}</td> <!-- Nama -->
+                        <td>{{ $item->status }}</td> <!-- Status -->
+                        <td>{{ $item->checkin_time }}</td> <!-- Clock-in -->
+                        <td>{{ $item->checkout_time }}</td> <!-- Clock-out -->
+                        <td>{{ $item->date }}</td> <!-- Tanggal -->
+                        <td>
+                            <!-- Contoh aksi -->
+                            <a href="" class="btn btn-primary btn-sm">Edit</a>
+                            <form action="" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
-
     </div>
 @endsection

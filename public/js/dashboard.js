@@ -17,7 +17,7 @@ toggle.addEventListener("click", function () {
 $(document).ready(function () {
     $(".status-btn").click(function (event) {
         event.preventDefault();
-
+        
         var status = $(this).data("status");
         var token = $('meta[name="csrf-token"]').attr("content");
 

@@ -2,7 +2,7 @@
 .navbar {
     background: linear-gradient(
         to bottom,
-        rgba(255, 14, 14, 0.822),
+        rgba(255, 44, 44, 0.822),
         rgba(255, 255, 255, 0.909)
     );
 }
@@ -10,7 +10,7 @@
 .footer-dark {
     background: linear-gradient(
         to top,
-        rgba(255, 14, 14, 0.822),
+        rgba(255, 44, 44, 0.822),
         rgba(250, 235, 235, 0.7)
     );
     border-bottom: 1px solid #e4ebf3;
