@@ -210,18 +210,14 @@ header .image-text .profession {
 }
 
 .sidebar li a:hover {
-    background-color: #f79999;
-    height: 30px;
+    background-color: #ff2929;
+    height: 35px;
+    min-width: 20px;
 }
 
 .sidebar li a:hover .icon,
 .sidebar li a:hover .text {
     color: var(--text-color) !important;
-}
-
-body.dark .sidebar li a:hover .icon,
-body.dark .sidebar li a:hover .text {
-    color: var(--text-color);
 }
 
 .sidebar .menu-bar {

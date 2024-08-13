@@ -26,24 +26,39 @@
                         <span class="text nav-text">Histori</span>
                     </a>
                 </li>
+
                 <li class="nav-link">
-                    <a class="nav {{ Request::is('dashboard/wallets') ? 'active' : '' }}" href="#">
-                        <i class='bx bx-wallet icon'></i>
-                        <span class="text nav-text">Wallets</span>
+                    <a class="nav {{ Request::is('dashboard/editprofile') ? 'active' : '' }}"
+                        href="/dashboard/editprofile">
+                        <i class='bx bx-history icon'></i>
+                        <span class="text nav-text">profile</span>
+                    </a>
+                </li>
+
+                <!-- Tambahkan link ini jika user adalah superadmin -->
+                @if (auth()->user()->role == 'superadmin')
+                    <li class="nav-link">
+                        <a class="nav {{ Request::is('dashboard/users') ? 'active' : '' }}" href="/dashboard/users">
+                            <i class='bx bx-user icon'></i>
+                            <span class="text nav-text">User All</span>
+                        </a>
+                    </li>
+                @endif
+
+                <li class="nav-link">
+                    <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                    </form>
+                    <a class="nav" href="#"
+                        onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">Logout</span>
                     </a>
                 </li>
             </ul>
         </div>
-        <div class="bottom-content">
-            <li class="nav-link">
-                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                    @csrf
-                    <button type="submit" class="logout-button">
-                        <i class='bx bx-log-out icon'></i>
-                        <span class="text nav-text">Logout</span>
-                    </button>
-                </form>
-            </li>
 
-        </div>
+        </ul>
+    </div>
+
 </nav>

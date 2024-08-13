@@ -156,6 +156,39 @@ class ParticipanController extends Controller
         //
     }
 
+    public function editprofile(Request $request)
+    {
+        // $validatedData = $request->validate([
+        //     'full_name' => 'required|string|max:255',
+        //     'bumn' => 'required|string|max:255',
+        //     'password' => 'nullable|string|min:8',
+        //     'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        // ]);
+
+        // // Ambil user yang sedang login
+        // $user = Auth::user();
+
+        // // Update data user
+        // $user->full_name = $validatedData['full_name'];
+        // $user->bumn = $validatedData['bumn'];
+
+        // if ($request->filled('password')) {
+        //     $user->password = bcrypt($validatedData['password']);
+        // }
+
+        // // Cek apakah ada file foto yang diupload
+        // if ($request->hasFile('foto')) {
+        //     $path = $request->file('foto')->store('images/foto', 'public');
+        //     $user->foto = $path;
+        // }
+
+        // // Simpan perubahan ke database
+        // $user->save();
+
+        
+        return view("dashboard.profile.editprofile");
+    }
+
     public function showMap()
     {
         $user = Auth::user();
