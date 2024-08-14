@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
 use App\Models\Dashboard;
 
@@ -184,9 +186,50 @@ class ParticipanController extends Controller
 
         // // Simpan perubahan ke database
         // $user->save();
+        $user = Auth::user()->name;
+        $users = DB::table('users')->where('name', $user)->first();
+        return view("dashboard.profile.editprofile", compact('users'));
+    }
+    public function updateprofile(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'bumn' => 'required|string|max:255',
+            'password' => 'nullable|string|min:6', // Validasi password minimal 6 karakter
+            'image_profile' => 'nullable|image|file|max:1024',
+        ]);
+        $user = Auth::user();
+        $name = Auth::user()->name;
+        $users = DB::table('users')->where('id', $user->id)->first();
+        if ($request->hasFile('image_profile')) {
+            $image_profile = $name . "." . $request->file('image_profile')->getClientOriginalExtension();
+        } else {
+            $image_profile = 'image_profile';
+        }
 
-        
-        return view("dashboard.profile.editprofile");
+
+        // Jika password diisi, hash password baru
+        $password = $request->filled('password') ? Hash::make($request->password) : $user->password;
+
+        $data = [
+            'name' => $validatedData['name'],
+            'bumn' => $validatedData['bumn'],
+            'password' => $password,
+            'image_profile' => $image_profile
+        ];
+
+        // Update berdasarkan id pengguna
+        $update = DB::table('users')->where('id', $user->id)->update($data);
+
+        if ($update) {
+            if ($request->hasFile('image_profile')) {
+                $folderpath = "public/uploads/image_profile/";
+                $request->file('image_profile')->storeAs($folderpath, $image_profile);
+            }
+            return Redirect::back()->with('success', 'Profile updated successfully');
+        } else {
+            return Redirect::back()->with('error', 'Profile update failed');
+        }
     }
 
     public function showMap()

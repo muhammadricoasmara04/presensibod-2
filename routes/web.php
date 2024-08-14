@@ -26,5 +26,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('dashboard/store', [ParticipanController::class, 'store']);
         // routes/web.php
         Route::post('/dashboard/uploadSickLetter', [ParticipanController::class, 'uploadSickLetter']);
+        Route::post('/dashboard/{id}/editprofile', [ParticipanController::class, 'updateprofile']);
     });
 });

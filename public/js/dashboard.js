@@ -17,7 +17,7 @@ toggle.addEventListener("click", function () {
 $(document).ready(function () {
     $(".status-btn").click(function (event) {
         event.preventDefault();
-        
+
         var status = $(this).data("status");
         var token = $('meta[name="csrf-token"]').attr("content");
 
@@ -96,3 +96,20 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+document
+    .getElementById("fileuploadInput")
+    .addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+                const imagePreview = document.getElementById("imagePreview");
+                imagePreview.setAttribute("src", event.target.result);
+                imagePreview.style.display = "block"; // Tampilkan gambar
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
