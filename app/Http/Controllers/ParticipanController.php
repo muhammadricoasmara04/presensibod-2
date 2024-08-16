@@ -20,12 +20,14 @@ class ParticipanController extends Controller
      */
     public function index()
     {
+        $id = Auth::id();
         $today = date("Y-m-d");
         $name   = Auth::user()->name;
         $presensitoday = DB::table('presensi')->where('name', $name)->where('date', $today)->first();
+        $user_profile = DB::table('users')->where('name', $name)->first();
         $checkin_in = $presensitoday ? $presensitoday->checkin_time : 'Belum Absen';
         $checkout_out = $presensitoday && $presensitoday->checkout_time ? $presensitoday->checkout_time : 'Belum Absen';
-        return view('/dashboard/peserta/index', compact('presensitoday', 'checkin_in', 'checkout_out'));
+        return view('/dashboard/peserta/index', compact('presensitoday', 'checkin_in', 'checkout_out', 'user_profile'));
     }
 
     /**
@@ -131,6 +133,7 @@ class ParticipanController extends Controller
         $user = Auth::user(); // Mendapatkan data user yang sedang login
         $presensi = DB::table('presensi')->where('user_id', $user->id)->get();
 
+
         return view("/dashboard/peserta/show", ['presensi' => $presensi]);
     }
 
@@ -188,49 +191,56 @@ class ParticipanController extends Controller
         // $user->save();
         $user = Auth::user()->name;
         $users = DB::table('users')->where('name', $user)->first();
-        return view("dashboard.profile.editprofile", compact('users'));
+        return view("dashboard.profile.editprofile", compact('users'), ['user' => $user]);
     }
-    public function updateprofile(Request $request)
+
+    public function updateprofile(Request $request, $id)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
-            'bumn' => 'required|string|max:255',
-            'password' => 'nullable|string|min:6', // Validasi password minimal 6 karakter
-            'image_profile' => 'nullable|image|file|max:1024',
+            'bumn' => 'nullable|string|max:255',
+            'password' => 'nullable|min:6|confirmed',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Maksimal 2MB
         ]);
-        $user = Auth::user();
-        $name = Auth::user()->name;
-        $users = DB::table('users')->where('id', $user->id)->first();
-        if ($request->hasFile('image_profile')) {
-            $image_profile = $name . "." . $request->file('image_profile')->getClientOriginalExtension();
-        } else {
-            $image_profile = 'image_profile';
+
+        // Cari pengguna berdasarkan ID
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'User not found.');
         }
 
+        // Update nama dan BUMN
+        $user->name = $request->input('name');
+        $user->bumn = $request->input('bumn');
 
-        // Jika password diisi, hash password baru
-        $password = $request->filled('password') ? Hash::make($request->password) : $user->password;
+        // Update password jika ada
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
 
-        $data = [
-            'name' => $validatedData['name'],
-            'bumn' => $validatedData['bumn'],
-            'password' => $password,
-            'image_profile' => $image_profile
-        ];
-
-        // Update berdasarkan id pengguna
-        $update = DB::table('users')->where('id', $user->id)->update($data);
-
-        if ($update) {
-            if ($request->hasFile('image_profile')) {
-                $folderpath = "public/uploads/image_profile/";
-                $request->file('image_profile')->storeAs($folderpath, $image_profile);
+        // Proses foto jika diupload
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama jika ada
+            if ($user->image_profile && Storage::exists($user->image_profile)) {
+                Storage::delete($user->image_profile);
             }
-            return Redirect::back()->with('success', 'Profile updated successfully');
-        } else {
-            return Redirect::back()->with('error', 'Profile update failed');
+
+            // Simpan foto baru
+            $userName = $request->id;
+            $file = $request->file('foto');
+            $filename = $userName . '-' . $file->getClientOriginalName();
+            $path = $file->storeAs('public/uploads/profileimage', $filename);
+            $user->image_profile = $path;
         }
+
+        // Simpan perubahan
+        $user->save();
+
+        // Redirect dengan pesan sukses
+        return redirect()->back()->with('success', 'Profile updated successfully.');
     }
+
 
     public function showMap()
     {

@@ -1,12 +1,19 @@
 <nav class="sidebar close">
     <header>
         <div class="image-text">
-            <span class="image">
-                <img src="/img/rico.jpg" alt="User Image">
-            </span>
+            @if (Auth::user()->role == 'peserta')
+                @php
+                    $path = Storage::url($user_profile->image_profile);
+                @endphp
+                <span class="image">
+                    <img src="{{ $path }}" alt="avatar">
+                </span>
+            @else
+                <img src="{{ asset('img/default-avatar.png') }}" alt="default avatar">
+            @endif
             <div class="text logo-text">
-                <span class="name">Codinglab</span>
-                <span class="profession">Web developer</span>
+                <span class="name">{{ Auth::user()->name }}</span>
+                <span class="profession">{{ Auth::user()->bumn }}</span>
             </div>
         </div>
         <i class='bx bx-chevron-right toggle'></i>

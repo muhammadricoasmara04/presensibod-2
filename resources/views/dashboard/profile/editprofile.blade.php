@@ -39,6 +39,13 @@
                     @endif
                 </div>
             </div>
+            <div class="form-group boxed">
+                <div class="input-wrapper">
+                    <label for="password_confirmation" class="password_label">Confirm Password</label>
+                    <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password"
+                        autocomplete="off">
+                </div>
+            </div>
             <div class="custom-file-upload" id="fileUpload1">
                 <label for="fileuploadInput" class="password_label">Upload Foto</label>
                 <input type="file" name="foto" id="fileuploadInput" accept=".png, .jpg, .jpeg">

@@ -2,7 +2,6 @@
 @section('container')
     <link href='/css/peserta_dashboard.css' rel='stylesheet'>
     <h3>Presensi Harian</h3>
-
     @if ($presensitoday == null)
         <div class="wrapperbtn d-flex flex-column align-items-center py-3">
             <a href="{{ url('/dashboard/create?status=Hadir') }}" class="btn btn-primary w-75 mb-2"
@@ -38,5 +37,22 @@
                     </div>
                 </div>
             </div>
+
+            @if ($user_profile && $user_profile->image_profile)
+                <div class="gambar-container mt-3">
+                    <h4>Foto Saat Check-In</h4>
+                    <img src="{{ asset('storage/uploads/profileimage/' . $user_profile->image_profile) }}"
+                        alt="Foto Check-In" class="img-thumbnail">
+                </div>
+            @endif
+            @if ($presensitoday && $presensitoday->image_in)
+                <div class="gambar-container mt-3">
+                    <h4>Foto Saat Check-In</h4>
+                    <img src="{{ asset('storage/uploads/absensi/' . $presensitoday->image_in) }}" alt="Foto Check-In"
+                        class="img-thumbnail">
+                </div>
+            @endif
     @endif
+
+
 @endsection

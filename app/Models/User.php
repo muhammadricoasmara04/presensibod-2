@@ -24,7 +24,7 @@ class User extends Authenticatable
         'full_name',
         'bumn',
         'password',
-        'foto',
+        'image_profile',
 
     ];
 
