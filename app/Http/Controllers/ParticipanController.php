@@ -20,13 +20,19 @@ class ParticipanController extends Controller
      */
     public function index()
     {
-        $id = Auth::id();
+        $id = Auth::id(); // Ambil ID pengguna yang sedang login
         $today = date("Y-m-d");
-        $name   = Auth::user()->name;
-        $presensitoday = DB::table('presensi')->where('name', $name)->where('date', $today)->first();
-        $user_profile = DB::table('users')->where('name', $name)->first();
+
+        // Cari presensi berdasarkan ID pengguna dan tanggal hari ini
+        $presensitoday = DB::table('presensi')->where('user_id', $id)->where('date', $today)->first();
+
+        // Ambil data profil pengguna berdasarkan ID
+        $user_profile = DB::table('users')->where('id', $id)->first();
+
+        // Lain-lain
         $checkin_in = $presensitoday ? $presensitoday->checkin_time : 'Belum Absen';
         $checkout_out = $presensitoday && $presensitoday->checkout_time ? $presensitoday->checkout_time : 'Belum Absen';
+
         return view('/dashboard/peserta/index', compact('presensitoday', 'checkin_in', 'checkout_out', 'user_profile'));
     }
 
@@ -67,9 +73,9 @@ class ParticipanController extends Controller
      */
     public function store(Request $request)
     {
-        $user_id = $request->user_id;
+        $user_id = Auth::id(); // Gunakan ID pengguna yang sedang login
+        $name = Auth::user()->name;
         $location = $request->location;
-        $name = $request->user()->name;
         $image = $request->image;
         $checkin_time = date("H:i:s");
         $checkout_time = date("H:i:s");
@@ -79,7 +85,9 @@ class ParticipanController extends Controller
         $folder_path = "public/uploads/absensi/";
         $image_parts = explode(";base64,", $image);
         $image_base64 = base64_decode($image_parts[1]);
-        $check = DB::table('presensi')->where('date', $date)->where('name', $name)->count();
+
+        // Periksa apakah pengguna sudah melakukan check-in
+        $check = DB::table('presensi')->where('date', $date)->where('user_id', $user_id)->count();
 
         if ($check > 0) {
             $formatName = $name . "-" . $date . "-checkout";
@@ -90,7 +98,7 @@ class ParticipanController extends Controller
                 'image_out' => $fileName,
                 'location_out' => $location,
             ];
-            $update = DB::table('presensi')->where('date', $date)->where('name', $name)->update($date_out);
+            $update = DB::table('presensi')->where('date', $date)->where('user_id', $user_id)->update($date_out);
             if ($update) {
                 echo "success|Terimakasih, Sudah Absen Pulang|out";
                 Storage::put($file, $image_base64);
@@ -112,8 +120,6 @@ class ParticipanController extends Controller
                 'status' => $status,
                 'reason' => $reason,
             ];
-
-
 
             $simpan = DB::table('presensi')->insert($data);
             if ($simpan) {
