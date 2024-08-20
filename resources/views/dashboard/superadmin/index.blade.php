@@ -15,50 +15,13 @@
                     </div>
                     <!-- Small boxes (Stat box) -->
                     <div class="row">
-                        <div class="col-lg-4 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-info">
-                                <div class="inner">
-                                    <h3></h3>
-                                    <p>Histori Presensi</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-users"></i>
-                                </div>
-                                <a href="" class="small-box-footer">Detail <i
-                                        class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-4 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-success">
-                                <div class="inner">
-                                    <h3></h3>
-                                    <p>Account User</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-building"></i>
-                                </div>
-                                <a href="" class="small-box-footer">Detail <i
-                                        class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-4 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-danger">
-                                <div class="inner">
-                                    <h3></h3>
-
-                                    <p>overall</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-envelope-square"></i>
-                                </div>
-                                <a href="" class="small-box-footer">Detail <i
-                                        class="fas fa-arrow-circle-right"></i></a>
-                            </div>
+                        <div class="card-body-admin">
+                            <img src="/img/circle.png" class="card-img-absolute" alt="circle-image">
+                            <h4 class="font-weight-normal mb-3">History Presensi <i
+                                    class="mdi mdi-chart-line mdi-24px float-end"></i>
+                            </h4>
+                            <i class='bx bx-history'></i>
+                            <h6 class="card-text">Increased by 60%</h6>
                         </div>
                     </div>
                     <!-- /.row -->

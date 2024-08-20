@@ -27,11 +27,50 @@
 .small-box {
     border-radius: 8px;
 }
-.small-box .p {
-    align-items: center;
+.inner {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+}
+.inner p {
+    margin: 0;
 }
 
 .card-body {
     border-radius: 10px;
+}
+
+/* sadsad */
+
+.card-body-admin {
+    position: relative; /* Agar elemen anak bisa diatur posisinya */
+    padding: 20px;
+    background-color: rgb(70, 168, 255);
+    border-radius: 8px;
+    color: #000; /* Warna teks */
+}
+
+.card-body-admin i {
+    font-size: 100px; /* Sesuaikan ukuran ikon */
+    color: rgba(249, 57, 57, 0.959); /* Warna putih dengan transparansi */
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Posisikan di tengah elemen */
+    z-index: 0; /* Menempatkan ikon di belakang teks */
+}
+
+.card-body-admin h4,
+.card-body-admin h6,
+.card-body-admin .bx-history {
+    position: relative;
+    z-index: 1; /* Menempatkan teks di atas ikon */
+}
+
+.card-img-absolute {
+    display: none; /* Menyembunyikan gambar SVG jika tidak ingin ditampilkan */
 }

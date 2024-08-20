@@ -21,32 +21,47 @@
     <div class="menu-bar">
         <div class="menu">
             <ul class="menu-links">
-                <li class="nav-link">
-                    <a class="nav {{ Request::is('dashboard') ? 'active' : '' }}" href="/dashboard/">
-                        <i class='bx bx-home-alt icon'></i>
-                        <span class="text nav-text">Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-link">
-                    <a class="nav {{ Request::is('dashboard/show') ? 'active' : '' }}" href="/dashboard/show">
-                        <i class='bx bx-history icon'></i>
-                        <span class="text nav-text">Histori</span>
-                    </a>
-                </li>
+                @if (auth()->user()->role == 'peserta')
+                    <li class="nav-link">
+                        <a class="nav {{ Request::is('dashboard') ? 'active' : '' }}" href="/dashboard">
+                            <i class='bx bx-home-alt icon'></i>
+                            <span class="text nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a class="nav {{ Request::is('dashboard/show') ? 'active' : '' }}" href="/dashboard/show">
+                            <i class='bx bx-history icon'></i>
+                            <span class="text nav-text">Histori</span>
+                        </a>
+                    </li>
 
-                <li class="nav-link">
-                    <a class="nav {{ Request::is('dashboard/editprofile') ? 'active' : '' }}"
-                        href="/dashboard/editprofile">
-                        <i class='bx bx-history icon'></i>
-                        <span class="text nav-text">profile</span>
-                    </a>
-                </li>
-
+                    <li class="nav-link">
+                        <a class="nav {{ Request::is('dashboard/editprofile') ? 'active' : '' }}"
+                            href="/dashboard/editprofile">
+                            <i class='bx bx-history icon'></i>
+                            <span class="text nav-text">profile</span>
+                        </a>
+                    </li>
+                @endif
                 <!-- Tambahkan link ini jika user adalah superadmin -->
                 @if (auth()->user()->role == 'superadmin')
                     <li class="nav-link">
-                        <a class="nav {{ Request::is('dashboard/users') ? 'active' : '' }}" href="/dashboard/users">
+                        <a class="nav {{ Request::is('admin/') ? 'active' : '' }}" href="/admin">
+                            <i class='bx bxs-dashboard icon'></i>
+                            <span class="text nav-text">Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a class="nav {{ Request::is('admin/userall') ? 'active' : '' }}" href="/admin/userall">
                             <i class='bx bx-user icon'></i>
+                            <span class="text nav-text">User All</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a class="nav {{ Request::is('admin/recap') ? 'active' : '' }}" href="/admin/recap">
+                            <i class='bx bx-spreadsheet icon'></i>
                             <span class="text nav-text">User All</span>
                         </a>
                     </li>

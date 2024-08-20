@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Superadmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class SuperadminController extends Controller
 {
@@ -13,7 +17,7 @@ class SuperadminController extends Controller
      */
     public function index()
     {
-        return view ("dashboard.superadmin.index");
+        return view("dashboard.superadmin.index");
     }
 
     /**
@@ -62,6 +66,11 @@ class SuperadminController extends Controller
     public function destroy(Superadmin $superadmin)
     {
         //
+    }
+    public function userAll()
+    {
+        $usersDB = DB::table('users')->get(); // Mengambil semua data dari tabel users
+        return view('dashboard.superadmin.show', compact('usersDB'));
     }
     public function logout(Request $request)
     {

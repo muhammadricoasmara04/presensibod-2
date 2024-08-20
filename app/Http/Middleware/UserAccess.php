@@ -35,7 +35,7 @@ class UserAccess
             $user = Auth::user();
             if ($user->role !== $role) {
                 // Redirect jika role tidak sesuai
-                return response()->json('tidak dapat mengakses karena anda superadmin');
+                return redirect('/')->with('message', 'Anda tidak memiliki akses ke halaman ini.');
             }
         } else {
             return redirect('/');
