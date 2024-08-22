@@ -3,6 +3,8 @@
 @section('container')
     <h2>Responsive Table</h2>
 
+    <a href="/admin/registerusers" type="button" class="btn bg-primary"><i class='bx bxs-user-plus'></i>Add Users</a>
+
     <div class="table-wrapper" style="overflow-x: auto;">
         <table class="fl-table">
             <thead>

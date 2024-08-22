@@ -44,14 +44,26 @@
     border-radius: 10px;
 }
 
-/* sadsad */
+/*  */
 
 .card-body-admin {
-    position: relative; /* Agar elemen anak bisa diatur posisinya */
-    padding: 20px;
-    background-color: rgb(70, 168, 255);
+    display: grid; /* Use CSS Grid to control the layout */
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(200px, 1fr)
+    ); /* Create responsive columns */
+    gap: 20px; /* Add spacing between the grid items */
+}
+
+.card_inner {
+    background-image: url(/img/circle.jpg);
+    background-color: #ff5b61;
+    background-repeat: no-repeat;
+    background-size: cover; /* Ensures the image covers the entire area of the card */
+    background-position: center;
+    padding: 15px;
     border-radius: 8px;
-    color: #000; /* Warna teks */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .card-body-admin i {
@@ -73,4 +85,8 @@
 
 .card-img-absolute {
     display: none; /* Menyembunyikan gambar SVG jika tidak ingin ditampilkan */
+}
+
+.table-wrapper {
+    margin-top: 20px;
 }

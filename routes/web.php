@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LoginController::class, 'index'])->name('login.index')->middleware('guest');
 Route::post('/', [LoginController::class, 'authenticate'])->name('login.authenticate');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+// Register Users
+Route::get('admin/registerusers',[RegisterController::class,'index'])->middleware('auth');
+Route::post('admin/registerusers',[RegisterController::class,'store']);
+
 
 // Authenticated Routes
 Route::middleware(['auth'])->group(function () {
@@ -19,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('admin/', [SuperadminController::class, 'index'])->middleware('auth');
         Route::get('admin/userall', [SuperadminController::class, 'userAll'])->middleware('auth');
+        Route::get('admin/recap', [SuperadminController::class, 'recapAll'])->middleware('auth');
     });
 
     Route::middleware([UserAccess::class . ':peserta'])->group(function () {

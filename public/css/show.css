@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -22,6 +26,7 @@ h2 {
 .table-wrapper {
     box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
     overflow-x: auto;
+    padding-top: 10px;
 }
 
 .fl-table {

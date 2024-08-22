@@ -6,6 +6,7 @@ use App\Models\Superadmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
@@ -47,9 +48,10 @@ class SuperadminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Superadmin $superadmin)
+    public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('dashboard.edit_user', compact('user'));
     }
 
     /**
@@ -71,6 +73,12 @@ class SuperadminController extends Controller
     {
         $usersDB = DB::table('users')->get(); // Mengambil semua data dari tabel users
         return view('dashboard.superadmin.show', compact('usersDB'));
+    }
+
+    public function recapAll()
+    {
+        $usersRecap = DB::table('presensi')->get();
+        return view('dashboard.superadmin.recap', compact('usersRecap'));
     }
     public function logout(Request $request)
     {

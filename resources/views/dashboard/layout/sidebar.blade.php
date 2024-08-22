@@ -46,7 +46,7 @@
                 <!-- Tambahkan link ini jika user adalah superadmin -->
                 @if (auth()->user()->role == 'superadmin')
                     <li class="nav-link">
-                        <a class="nav {{ Request::is('admin/') ? 'active' : '' }}" href="/admin">
+                        <a class="nav {{ Request::is('admin') ? 'active' : '' }}" href="/admin">
                             <i class='bx bxs-dashboard icon'></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
@@ -62,7 +62,7 @@
                     <li class="nav-link">
                         <a class="nav {{ Request::is('admin/recap') ? 'active' : '' }}" href="/admin/recap">
                             <i class='bx bx-spreadsheet icon'></i>
-                            <span class="text nav-text">User All</span>
+                            <span class="text nav-text">Recap All</span>
                         </a>
                     </li>
                 @endif
@@ -79,7 +79,6 @@
                 </li>
             </ul>
         </div>
-
         </ul>
     </div>
 

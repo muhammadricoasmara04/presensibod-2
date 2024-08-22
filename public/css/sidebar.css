@@ -211,9 +211,9 @@ header .image-text .profession {
 }
 
 .sidebar li a:hover {
-    background-color: #ff2929;
+    background-color: var(--red-color);
     height: 35px;
-    min-width: 20px;
+    min-width: 30px;
 }
 
 .sidebar li a:hover .icon,
@@ -299,7 +299,7 @@ header .image-text .profession {
 /* active */
 .sidebar .nav.active {
     background-color: var(--red-color);
-    height: 27px;
+    height: 35px;
     width: 170px; /* Lebar yang lebih besar dari sidebar */
     position: absolute;
     z-index: 1; /* Pastikan elemen ini di atas elemen lainnya */

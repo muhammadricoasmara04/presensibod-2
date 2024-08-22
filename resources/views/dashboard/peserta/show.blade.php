@@ -1,7 +1,7 @@
 @extends('dashboard.layout.main')
 
 @section('container')
-    <h2>Responsive Table</h2>
+    <h2>Histori Absen </h2>
 
     <div class="table-wrapper" style="overflow-x: auto;">
         <table class="fl-table">
@@ -29,12 +29,7 @@
                         <td>{{ $item->date }}</td> <!-- Tanggal -->
                         <td>
                             <!-- Contoh aksi -->
-                            <a href="" class="btn btn-primary btn-sm">Edit</a>
-                            <form action="" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
+                            <a href="" class="btn btn-primary btn-sm">Preview</a>
                         </td>
                     </tr>
                 @endforeach
